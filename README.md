@@ -25,7 +25,10 @@ npm run build
 ```
 
 ## Use extension
-Load extension from `/dist` folder
+
+- Open chrome://extensions/
+- Click `LOAD UNPACKED`
+- Select `/dist` folder
 
 ## Links
  - https://developer.chrome.com/extensions/getstarted
