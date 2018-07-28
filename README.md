@@ -1,6 +1,6 @@
 # Save scrollbar position
 
-Save scrollbar position for websites
+Google Chrome extension for saving scrollbar position of websites
 
 ## Setup
 

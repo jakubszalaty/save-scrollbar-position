@@ -1,7 +1,7 @@
 {
     "name": "Save scrollbar position",
     "version": "0.1",
-    "description": "Save scrollbar position for websites",
+    "description": "Google Chrome extension for saving scrollbar position of websites",
     "permissions": ["activeTab", "declarativeContent", "storage"],
     "background": {
         "scripts": ["background/index.js"],
