@@ -5,11 +5,7 @@ const renderList = () =>
         const list = Object.keys(items).map(
             (url) => `<li><a href="${url}">${url}</a><button value="${url}">Remove</button></li>`
         )
-        content.innerHTML = `
-    <h3>List of urls</h3>
-    <ul>
-        ${list.join('')}
-    </ul>`
+        content.innerHTML = `<h3>List of urls</h3><ul>${list.join('')}</ul>`
     })
 
 content.addEventListener('click', (event) => {
