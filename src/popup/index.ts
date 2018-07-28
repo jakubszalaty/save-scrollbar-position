@@ -13,9 +13,12 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
             },
             (data) => {
                 if (data) {
-                    const scrollY = data[0]
-                    chrome.storage.sync.set({ [url]: scrollY })
-                    statusScroll.textContent = 'Scroll position saved'
+                    const scrollObj = { scroll: data[0], date: new Date().toISOString() }
+
+                    chrome.storage.sync.set({ [url]: scrollObj })
+
+                    const date = new Date(scrollObj.date).toLocaleString()
+                    statusScroll.textContent = `Scroll position saved at ${date}`
                 }
             }
         )
@@ -27,10 +30,11 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     })
 
     chrome.storage.sync.get(url, (data) => {
-        const scrollY = data[url] || null
+        const scrollObj = data[url] || null
+        const date = new Date(scrollObj.date).toLocaleString()
 
-        if (scrollY) {
-            statusScroll.textContent = 'Scroll position saved'
+        if (scrollObj) {
+            statusScroll.textContent = `Scroll position saved at ${date}`
         } else {
             statusScroll.textContent = 'Scroll position not saved'
         }
