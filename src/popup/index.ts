@@ -22,7 +22,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     })
 
     clear.addEventListener('click', (element: any) => {
-        chrome.storage.sync.set({ [url]: null })
+        chrome.storage.sync.remove(url)
         statusScroll.textContent = 'Scroll position not saved'
     })
 

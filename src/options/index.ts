@@ -1,19 +1,23 @@
-const page = document.getElementById('buttonDiv')
-const kButtonColors = ['#3aa757', '#e8453c', '#f9bb2d', '#4688f1']
+const content = document.getElementById('content')
 
-const constructOptions = (kButtonColors) => {
-    for (const item of kButtonColors) {
+const renderList = () =>
+    chrome.storage.sync.get((items) => {
+        const list = Object.keys(items).map(
+            (url) => `<li><a href="${url}">${url}</a><button value="${url}">Remove</button></li>`
+        )
+        content.innerHTML = `
+    <h3>List of urls</h3>
+    <ul>
+        ${list.join('')}
+    </ul>`
+    })
 
-        const button = document.createElement('button')
-        button.style.backgroundColor = item
-
-        button.addEventListener('click', () => {
-            chrome.storage.sync.set({ color: item }, () => {
-                console.log('color is ' + item)
-            })
-        })
-
-        page.appendChild(button)
+content.addEventListener('click', (event) => {
+    const target: any = event.target
+    if (target.tagName === 'BUTTON') {
+        chrome.storage.sync.remove(target.value)
+        renderList()
     }
-}
-constructOptions(kButtonColors)
+})
+
+renderList()
