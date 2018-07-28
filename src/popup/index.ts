@@ -1,19 +1,38 @@
-const changeColor = document.getElementById('changeColor')
+const save = document.getElementById('save')
+const clear = document.getElementById('clear')
+const statusScroll = document.getElementById('statusScroll')
 
-chrome.storage.sync.get('color', (data) => {
-    changeColor.style.backgroundColor = data.color
-    changeColor.setAttribute('value', data.color)
-})
-
-let changed: boolean = false
-
-changeColor.onclick = (element: any) => {
-    const color = changed ? '' : element.target.value
-    changed = !changed
-
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        chrome.tabs.executeScript(tabs[0].id, {
-            code: `document.body.style.backgroundColor = "${color}";`,
-        })
+chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    const tab = tabs[0]
+    const { id, url } = tab
+    save.addEventListener('click', (element: any) => {
+        chrome.tabs.executeScript(
+            id,
+            {
+                code: `window.scrollY`,
+            },
+            (data) => {
+                if (data) {
+                    const scrollY = data[0]
+                    chrome.storage.sync.set({ [url]: scrollY })
+                    statusScroll.textContent = 'Scroll position saved'
+                }
+            }
+        )
     })
-}
+
+    clear.addEventListener('click', (element: any) => {
+        chrome.storage.sync.set({ [url]: null })
+        statusScroll.textContent = 'Scroll position not saved'
+    })
+
+    chrome.storage.sync.get(url, (data) => {
+        const scrollY = data[url] || null
+
+        if (scrollY) {
+            statusScroll.textContent = 'Scroll position saved'
+        } else {
+            statusScroll.textContent = 'Scroll position not saved'
+        }
+    })
+})
