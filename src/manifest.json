@@ -1,7 +1,7 @@
 {
-    "name": "Chrome extension template",
+    "name": "Save scrollbar position",
     "version": "0.1",
-    "description": "Build an Extension with Typescript!",
+    "description": "Save scrollbar position for websites",
     "permissions": ["activeTab", "declarativeContent", "storage"],
     "background": {
         "scripts": ["background/index.js"],

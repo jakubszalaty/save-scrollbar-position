@@ -1,6 +1,6 @@
 {
-    "name": "chrome-extension-template",
-    "description": "Build an Extension with Typescript!",
+    "name": "save-scrollbar-position",
+    "description": "Save scrollbar position for websites",
     "version": "0.1",
     "author": {
         "name": "Jakub Szalaty",

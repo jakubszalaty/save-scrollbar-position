@@ -1,5 +1,6 @@
-# Chrome extension template
-Build an Extension with Typescript!
+# Save scrollbar position
+
+Save scrollbar position for websites
 
 ## Setup
 
@@ -33,4 +34,4 @@ Load extension from `/dist` folder
 
 ## License
 
-Chrome extension template is [MIT licensed](LICENSE).
+Chrome extension is [MIT licensed](LICENSE).
